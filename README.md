@@ -1,15 +1,10 @@
-vccw/scaffold-vccw
-==================
+# vccw/scaffold-vccw
 
-
-
-[![Build Status](https://travis-ci.org/vccw/scaffold-vccw.svg?branch=master)](https://travis-ci.org/vccw/scaffold-vccw)
+[![Build Status](https://travis-ci.org/vccw-team/scaffold-vccw.svg?branch=master)](https://travis-ci.org/vccw-team/scaffold-vccw)
 
 Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contributing)
 
 ## Using
-
-
 
 ## Installing
 
@@ -21,15 +16,15 @@ Once you've done so, you can install this package with `wp package install vccw/
 
 We appreciate you taking the initiative to contribute to this project.
 
-Contributing isn’t limited to just code. We encourage you to contribute in the way that best fits your abilities, by writing tutorials, giving a demo at your local meetup, helping other users with their support questions, or revising our documentation.
+Contributing isn't limited to just code. We encourage you to contribute in the way that best fits your abilities, by writing tutorials, giving a demo at your local meetup, helping other users with their support questions, or revising our documentation.
 
 ### Reporting a bug
 
-Think you’ve found a bug? We’d love for you to help us get it fixed.
+Think you've found a bug? We'd love for you to help us get it fixed.
 
-Before you create a new issue, you should [search existing issues](https://github.com/vccw/scaffold-vccw/issues?q=label%3Abug%20) to see if there’s an existing resolution to it, or if it’s already been fixed in a newer version.
+Before you create a new issue, you should [search existing issues](https://github.com/vccw/scaffold-vccw/issues?q=label%3Abug%20) to see if there's an existing resolution to it, or if it's already been fixed in a newer version.
 
-Once you’ve done a bit of searching and discovered there isn’t an open or fixed issue for your bug, please [create a new issue](https://github.com/vccw/scaffold-vccw/issues/new) with the following:
+Once you've done a bit of searching and discovered there isn't an open or fixed issue for your bug, please [create a new issue](https://github.com/vccw/scaffold-vccw/issues/new) with the following:
 
 1. What you were doing (e.g. "When I run `wp post list`").
 2. What you saw (e.g. "I see a fatal about a class being undefined.").
