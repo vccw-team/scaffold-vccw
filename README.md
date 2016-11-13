@@ -2,9 +2,7 @@
 
 [![Build Status](https://travis-ci.org/vccw-team/scaffold-vccw.svg?branch=master)](https://travis-ci.org/vccw-team/scaffold-vccw)
 
-This is a WP-CLI command that generates a VCCW envirionment.
-
-Example:
+This is a WP-CLI command that generates a [VCCW](http://vccw.cc/) envirionment.
 
 ```
 $ wp scaffold vccw wordpress.dev --lang=ja
