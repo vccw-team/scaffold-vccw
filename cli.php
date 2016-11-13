@@ -33,15 +33,19 @@ class WP_CLI_Scaffold_VCCW extends WP_CLI_Command
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     # Basic usage
-	 *     $ wp scaffold vccw
+	 *     $ wp scaffold vccw wordpress.dev
+	 *     Generating:   100% [===========================] 0:03 / 0:06
+	 *     Success: Generated.
+	 *
+	 *     $ wp scaffold vccw wordpress.dev --lang=ja
+	 *     Generating:   100% [===========================] 0:03 / 0:06
 	 *     Success: Generated.
 	 *
 	 * @when before_wp_load
 	 */
 	public function __invoke( $args, $assoc_args )
 	{
-		$progress = \WP_CLI\Utils\make_progress_bar( 'Generating users', 10 );
+		$progress = \WP_CLI\Utils\make_progress_bar( 'Generating: ', 10 );
 
 		if ( empty( $assoc_args["host"] ) ) {
 			$assoc_args["host"] = "vccw.dev";

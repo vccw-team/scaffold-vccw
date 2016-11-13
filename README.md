@@ -2,46 +2,55 @@
 
 [![Build Status](https://travis-ci.org/vccw-team/scaffold-vccw.svg?branch=master)](https://travis-ci.org/vccw-team/scaffold-vccw)
 
-Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contributing)
-
 ## Using
 
 ## Installing
 
 Installing this package requires WP-CLI v0.23.0 or greater. Update to the latest stable release with `wp cli update`.
 
-Once you've done so, you can install this package with `wp package install vccw/scaffold-vccw`.
+Once you've done so, you can install this package with:
 
-## Contributing
+```
+$ wp package install vccw/scaffold-vccw
+```
 
-We appreciate you taking the initiative to contribute to this project.
+## Usage
 
-Contributing isn't limited to just code. We encourage you to contribute in the way that best fits your abilities, by writing tutorials, giving a demo at your local meetup, helping other users with their support questions, or revising our documentation.
+```
+NAME
 
-### Reporting a bug
+  wp scaffold vccw
 
-Think you've found a bug? We'd love for you to help us get it fixed.
+DESCRIPTION
 
-Before you create a new issue, you should [search existing issues](https://github.com/vccw/scaffold-vccw/issues?q=label%3Abug%20) to see if there's an existing resolution to it, or if it's already been fixed in a newer version.
+  Generate a new VCCW environment.
 
-Once you've done a bit of searching and discovered there isn't an open or fixed issue for your bug, please [create a new issue](https://github.com/vccw/scaffold-vccw/issues/new) with the following:
+SYNOPSIS
 
-1. What you were doing (e.g. "When I run `wp post list`").
-2. What you saw (e.g. "I see a fatal about a class being undefined.").
-3. What you expected to see (e.g. "I expected to see the list of posts.")
+  wp scaffold vccw <directory> [--host=<hostname>] [--ip=<ip-address>]
+  [--lang=<language>]
 
-Include as much detail as you can, and clear steps to reproduce if possible.
+OPTIONS
 
-### Creating a pull request
+  <directory>
+    The directory of the new VCCW based guest machine.
 
-Want to contribute a new feature? Please first [open a new issue](https://github.com/vccw/scaffold-vccw/issues/new) to discuss whether the feature is a good fit for the project.
+  [--host=<hostname>]
+    Hostname of the guest machine. Default is `vccw.dev`.
 
-Once you've decided to commit the time to seeing your pull request through, please follow our guidelines for creating a pull request to make sure it's a pleasant experience:
+  [--ip=<ip-address>]
+    IP address of the guest machine. Default is `192.168.33.10`.
 
-1. Create a feature branch for each contribution.
-2. Submit your pull request early for feedback.
-3. Include functional tests with your changes. [Read the WP-CLI documentation](https://wp-cli.org/docs/pull-requests/#functional-tests) for an introduction.
-4. Follow the [WordPress Coding Standards](http://make.wordpress.org/core/handbook/coding-standards/).
+  [--lang=<language>]
+    Language of the WordPress. Default is `en_US`.
 
+EXAMPLES
 
-*This README.md is generated dynamically from the project's codebase using `wp scaffold package-readme` ([doc](https://github.com/wp-cli/scaffold-package-command#wp-scaffold-package-readme)). To suggest changes, please submit a pull request against the corresponding part of the codebase.*
+    $ wp scaffold vccw wordpress.dev
+    Generating:   100% [===========================] 0:03 / 0:06
+    Success: Generated.
+
+    $ wp scaffold vccw wordpress.dev --lang=ja
+    Generating:   100% [===========================] 0:03 / 0:06
+    Success: Generated.
+```
