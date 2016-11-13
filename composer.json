@@ -8,6 +8,12 @@
     "autoload": {
         "files": [ "cli.php" ]
     },
+    "scripts": {
+        "install-phpunit-env": "bash bin/install-wp-tests.sh wordpress_test root '' localhost latest",
+        "install-behat-env": "WP_CLI_BIN_DIR=/tmp/wp-cli-phar bash bin/install-package-tests.sh",
+        "setup": "composer run install-phpunit-env && composer run install-behat-env",
+        "test": "phpunit && WP_CLI_BIN_DIR=/tmp/wp-cli-phar behat"
+    },
     "require": {
         "wp-cli/wp-cli": ">=0.23.0",
         "phpunit/phpunit": "^4.8"
