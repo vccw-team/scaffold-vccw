@@ -2,7 +2,7 @@
     "name": "vccw/scaffold-vccw",
     "description": "",
     "type": "wp-cli-package",
-    "homepage": "https://github.com/vccw/scaffold-vccw",
+    "homepage": "https://github.com/vccw-team/scaffold-vccw",
     "license": "MIT",
     "authors": [],
     "autoload": {
