@@ -1,6 +1,8 @@
+*.tar.gz
+*.zip
 .DS_Store
-wp-cli.local.yml
+composer.phar
+installer
 node_modules/
 vendor/
-*.zip
-*.tar.gz
+wp-cli.local.yml
