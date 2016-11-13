@@ -8,6 +8,10 @@
     "autoload": {
         "files": [ "cli.php" ]
     },
+    "scripts": {
+        "setup": "",
+        "test": "phpunit && behat"
+    },
     "require": {
         "wp-cli/wp-cli": ">=0.23.0",
         "phpunit/phpunit": "^4.8"

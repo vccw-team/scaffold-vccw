@@ -67,39 +67,3 @@ Feature: Test that WP-CLI `vccw/scaffold-vccw` loads.
       """
       lang: ja
       """
-
-    When I run `wp scaffold vccw wp1.dev --ip=192.123.123.123`
-    Then the return code should be 0
-    And STDOUT should contain:
-      """
-      Success: Generated.
-      """
-    And the wp1.dev/provision/default.yml file should exist
-    And the wp1.dev/site.yml file should exist
-    And the wp1.dev/site.yml file should contain:
-      """
-      hostname: vccw.dev
-      ip: 192.123.123.123
-      """
-    And the wp1.dev/site.yml file should contain:
-      """
-      lang: en_US
-      """
-
-    When I run `wp scaffold vccw wp2.dev --host=wp.dev`
-    Then the return code should be 0
-    And STDOUT should contain:
-      """
-      Success: Generated.
-      """
-    And the wp2.dev/provision/default.yml file should exist
-    And the wp2.dev/site.yml file should exist
-    And the wp2.dev/site.yml file should contain:
-      """
-      hostname: wp.dev
-      ip: 192.168.33.10
-      """
-    And the wp2.dev/site.yml file should contain:
-      """
-      lang: en_US
-      """
