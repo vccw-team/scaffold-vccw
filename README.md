@@ -17,7 +17,7 @@ Installing this package requires WP-CLI v0.23.0 or greater. Update to the latest
 Once you've done so, you can install this package with:
 
 ```
-$ wp package install vccw/scaffold-vccw
+$ wp package install vccw/scaffold-vccw:@stable
 ```
 
 ## Usage
