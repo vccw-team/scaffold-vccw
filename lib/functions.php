@@ -12,16 +12,30 @@ class Scaffold_VCCW
 	public static function get_latest_vccw_url()
 	{
 		$api = "https://api.github.com/repos/vccw-team/vccw/releases/latest";
-		$res = wp_remote_get( $api );
+		$body = json_decode( self::download( $api ) );
 
-		if ( is_wp_error( $res ) ) {
-			return $res;
-		}
-
-		if ( 200 === $res['response']['code'] ) {
-			$body = json_decode( $res['body'] );
+		if ( $body ) {
 			return $body->zipball_url;
 		}
+	}
+
+	/**
+	 * Download form `$url`.
+	 *
+	 * @return string Downloaded object.
+	 */
+	public static function download( $url )
+	{
+		$context = stream_context_create( array(
+			'http' => [
+				'method' => 'GET',
+				'header' => [
+					'User-Agent: PHP'
+				]
+			]
+		) );
+
+		return file_get_contents( $url, false, $context );
 	}
 
 	/**
@@ -34,7 +48,7 @@ class Scaffold_VCCW
 	public static function unzip( $src, $dest )
 	{
 		if ( ! is_file( $src ) ) {
-			return new WP_Error( "No such file or directory." );
+			throw new Exception( "No such file or directory." );
 		}
 		$zip = new ZipArchive;
 		$res = $zip->open( $src );
@@ -44,7 +58,7 @@ class Scaffold_VCCW
 			$zip->close();
 			return true;
 		}
-		return new WP_Error( "Can not open {$src}." );
+		throw new Exception( "Can not open {$src}." );
 	}
 
 	/**
@@ -75,8 +89,8 @@ class Scaffold_VCCW
 	 */
 	public static function rcopy( $src, $dest, $exclude = array() )
 	{
-		$src = untrailingslashit( $src );
-		$dest = untrailingslashit( $dest );
+		$src = preg_replace( "#/$#", "", $src );
+		$dest = preg_replace( "#/$#", "", $dest );
 		if ( ! is_dir( $dest ) ) {
 			mkdir( $dest, 0755 );
 		}
@@ -115,7 +129,7 @@ class Scaffold_VCCW
 	 */
 	public static function rempty( $dir, $excludes = array() )
 	{
-		$dir = untrailingslashit( $dir );
+		$dir = preg_replace( "#/$#", "", $dir );
 		$files = self::get_files( $dir, RecursiveIteratorIterator::CHILD_FIRST );
 		foreach ( $files as $fileinfo ) {
 			if ( $fileinfo->isDir() ) {
@@ -145,7 +159,7 @@ class Scaffold_VCCW
 	 */
 	public static function get_files( $dir, $flags = RecursiveIteratorIterator::SELF_FIRST )
 	{
-		$dir = untrailingslashit( $dir );
+		$dir = preg_replace( "#/$#", "", $dir );
 		$iterator = new RecursiveIteratorIterator(
 			new RecursiveDirectoryIterator( $dir, RecursiveDirectoryIterator::SKIP_DOTS ),
 			$flags
