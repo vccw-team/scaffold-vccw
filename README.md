@@ -2,9 +2,17 @@
 
 [![Build Status](https://travis-ci.org/vccw-team/scaffold-vccw.svg?branch=master)](https://travis-ci.org/vccw-team/scaffold-vccw)
 
-## Using
+This is a WP-CLI command that generates a VCCW envirionment.
 
-## Installing
+Example:
+
+```
+$ wp scaffold vccw wordpress.dev --lang=ja
+Generating:   100% [===========================] 0:03 / 0:06
+Success: Generated.
+```
+
+## Getting Started
 
 Installing this package requires WP-CLI v0.23.0 or greater. Update to the latest stable release with `wp cli update`.
 
