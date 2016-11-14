@@ -14,11 +14,10 @@
         "setup": "composer run install-phpunit-env && composer run install-behat-env",
         "test": "phpunit && WP_CLI_BIN_DIR=/tmp/wp-cli-phar behat"
     },
-    "require": {
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~2.5",
         "wp-cli/wp-cli": ">=0.23.0",
         "phpunit/phpunit": "^4.8"
-    },
-    "require-dev": {
-        "behat/behat": "~2.5"
     }
 }
