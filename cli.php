@@ -106,7 +106,7 @@ class WP_CLI_Scaffold_VCCW extends WP_CLI_Command
 		}
 
 		$sitefile = WP_CLI\Utils\mustache_render(
-			dirname( __FILE__ ) . '/templates/site.yml.mustache',
+			Scaffold_VCCW::get_yml_template(),
 			array(
 				'host' => $assoc_args["host"],
 				'ip' => $assoc_args["ip"],

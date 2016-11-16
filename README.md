@@ -20,6 +20,12 @@ Once you've done so, you can install this package with:
 $ wp package install vccw/scaffold-vccw:@stable
 ```
 
+## Customize your default site.yml
+
+1. [Download default template from GitHub](https://raw.githubusercontent.com/vccw-team/scaffold-vccw/master/templates/site.yml.mustache).
+2. Edit it.
+3. Place it under the file name of `~/.wp-cli/vccw.yml.mustache`.
+
 ## Usage
 
 ```
