@@ -120,7 +120,7 @@ class WP_CLI_Scaffold_VCCW extends WP_CLI_Command
 		usleep( 100000 );
 		$progress->finish();
 
-		WP_CLI::success( "Generated." );
+		WP_CLI::success( "Generated. Run `vagrant up`." );
 	}
 }
 
