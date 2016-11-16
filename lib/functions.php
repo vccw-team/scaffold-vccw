@@ -5,6 +5,28 @@ use WP_CLI\Utils;
 class Scaffold_VCCW
 {
 	/**
+	 * Get path to the mustache template.
+	 *
+	 * @return string Path to the template.
+	 */
+	public static function get_yml_template()
+	{
+		$home = getenv( 'HOME' );
+		if ( !$home ) {
+			// sometime in windows $HOME is not defined
+			$home = getenv( 'HOMEDRIVE' ) . getenv( 'HOMEPATH' );
+		}
+
+		$config = $home . '/.wp-cli';
+
+		if ( is_file( $config . '/vccw.yml.mustache' ) ) {
+			return $config . '/vccw.yml.mustache';
+		} else {
+			return dirname( __FILE__ ) . '/../templates/site.yml.mustache';
+		}
+	}
+
+	/**
 	 * Get URL of the latest VCCW.
 	 *
 	 * @return string Return URL or WP_Error object.
