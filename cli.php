@@ -31,6 +31,9 @@ class WP_CLI_Scaffold_VCCW extends WP_CLI_Command
 	 * [--lang=<language>]
 	 * : Language of the WordPress. Default is `en_US`.
 	 *
+	 * [--update]
+	 * : Update files of the VCCW to latest version.
+	 *
 	 * ## EXAMPLES
 	 *
 	 *     $ wp scaffold vccw wordpress.dev
@@ -45,8 +48,6 @@ class WP_CLI_Scaffold_VCCW extends WP_CLI_Command
 	 */
 	public function __invoke( $args, $assoc_args )
 	{
-		$progress = \WP_CLI\Utils\make_progress_bar( 'Generating: ', 10 );
-
 		if ( empty( $assoc_args["host"] ) ) {
 			$assoc_args["host"] = "vccw.dev";
 		}
@@ -59,32 +60,29 @@ class WP_CLI_Scaffold_VCCW extends WP_CLI_Command
 			$assoc_args["lang"] = "en_US";
 		}
 
+		$update = \WP_CLI\Utils\get_flag_value( $assoc_args, 'update' );
+
 		$path = preg_replace( "#/$#", "", $args[0] );
+		if ( is_file( $path . '/site.yml' ) && true !== $update ) {
+			WP_CLI::error( "`site.yml` already exists." );
+		}
 
 		$url = Scaffold_VCCW::get_latest_vccw_url();
 		if ( ! $url ) {
 			WP_CLI::error( "Can't connect GitHub's API. Please try later." );
 		}
-		usleep( 100000 );
-		$progress->tick();
 
 		$zip = Scaffold_VCCW::download( $url );
 		if ( ! $zip ) {
 			WP_CLI::error( "Can't download zip. Please try later." );
 		}
-		usleep( 100000 );
-		$progress->tick( 5 );
 
 		$file = tempnam( sys_get_temp_dir(), "" );
 		file_put_contents( $file, $zip );
-		usleep( 100000 );
-		$progress->tick();
 
 		try {
 			$dir = Scaffold_VCCW::tempdir();
 			Scaffold_VCCW::unzip( $file, $dir );
-			usleep( 100000 );
-			$progress->tick();
 		} catch (Exception $e) {
 			Scaffold_VCCW::rrmdir( $dir );
 			WP_CLI::error( $e->getMessage() );
@@ -96,8 +94,6 @@ class WP_CLI_Scaffold_VCCW extends WP_CLI_Command
 					$src = $dir . "/" . $file;
 					if ( preg_match( "/^vccw/", $file ) && is_dir( $src ) ) {
 						Scaffold_VCCW::rcopy( $src, $path );
-						usleep( 100000 );
-						$progress->tick();
 						break;
 					}
 				}
@@ -105,22 +101,22 @@ class WP_CLI_Scaffold_VCCW extends WP_CLI_Command
 			}
 		}
 
-		$sitefile = WP_CLI\Utils\mustache_render(
-			Scaffold_VCCW::get_yml_template(),
-			array(
-				'host' => $assoc_args["host"],
-				'ip' => $assoc_args["ip"],
-				'lang' => $assoc_args["lang"],
-			)
-		);
-
-		file_put_contents( $path . '/site.yml', $sitefile );
-
 		Scaffold_VCCW::rrmdir( $dir );
-		usleep( 100000 );
-		$progress->finish();
 
-		WP_CLI::success( "Generated. Run `vagrant up`." );
+		if ( true === $update ) {
+			WP_CLI::success( "Updated. Run `vagrant up`." );
+		} else {
+			$sitefile = WP_CLI\Utils\mustache_render(
+				Scaffold_VCCW::get_yml_template(),
+				array(
+					'host' => $assoc_args["host"],
+					'ip' => $assoc_args["ip"],
+					'lang' => $assoc_args["lang"],
+				)
+			);
+			file_put_contents( $path . '/site.yml', $sitefile );
+			WP_CLI::success( "Generated. Run `vagrant up`." );
+		}
 	}
 }
 

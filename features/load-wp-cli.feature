@@ -50,20 +50,25 @@ Feature: Test that WP-CLI `vccw/scaffold-vccw` loads.
       lang: ja
       """
 
-    When I run `wp scaffold vccw . --lang=ja`
+  Scenario: Run `wp scaffold vccw` with option
+    Given an empty directory
+
+    When I run `wp scaffold vccw .`
     Then the return code should be 0
     And STDOUT should contain:
       """
       Success: Generated.
       """
-    And the provision/default.yml file should exist
-    And the site.yml file should exist
-    And the site.yml file should contain:
+
+    When I try `wp scaffold vccw .`
+    Then STDERR should contain:
       """
-      hostname: vccw.dev
-      ip: 192.168.33.10
+      Error: `site.yml` already exists.
       """
-    And the site.yml file should contain:
+
+    When I run `wp scaffold vccw . --update`
+    Then the return code should be 0
+    And STDOUT should contain:
       """
-      lang: ja
+      Success: Updated.
       """
