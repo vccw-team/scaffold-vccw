@@ -53,11 +53,15 @@ Feature: Test that WP-CLI `vccw/scaffold-vccw` loads.
   Scenario: Run `wp scaffold vccw` with option
     Given an empty directory
 
-    When I run `wp scaffold vccw .`
+    When I run `wp scaffold vccw . --lang=tr_TR`
     Then the return code should be 0
     And STDOUT should contain:
       """
       Success: Generated.
+      """
+    And the site.yml file should contain:
+      """
+      lang: tr_TR
       """
 
     When I try `wp scaffold vccw .`
@@ -71,4 +75,8 @@ Feature: Test that WP-CLI `vccw/scaffold-vccw` loads.
     And STDOUT should contain:
       """
       Success: Updated.
+      """
+    And the site.yml file should contain:
+      """
+      lang: tr_TR
       """
