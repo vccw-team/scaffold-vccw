@@ -3,6 +3,18 @@
 class Scaffold_VCCW_Test extends WP_UnitTestCase
 {
 	/**
+	 * Tests for the `Scaffold_VCCW::get_latest_vccw_url()`.
+	 *
+	 * @test
+	 * @since 1.3.0
+	 */
+	public function get_latest_vccw_url()
+	{
+		$url = Scaffold_VCCW::get_latest_vccw_url();
+		$this->assertRegExp( '#^https://github.com/vccw-team/vccw/releases/download#', $url );
+	}
+
+	/**
 	 * Tests for the `Scaffold_VCCW::rempty()`.
 	 *
 	 * @test

@@ -36,7 +36,9 @@ class Scaffold_VCCW
 		$api = "https://api.github.com/repos/vccw-team/vccw/releases/latest";
 		$body = json_decode( self::download( $api ) );
 
-		if ( $body ) {
+		if ( ! empty( $body->assets[0] ) && ! empty( $body->assets[0]->browser_download_url ) ) {
+			return $body->assets[0]->browser_download_url;
+		} elseif ( $body ) {
 			return $body->zipball_url;
 		}
 	}
