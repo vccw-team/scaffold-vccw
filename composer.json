@@ -6,6 +6,9 @@
     "license": "MIT",
     "authors": [],
     "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
         "files": [ "cli.php" ]
     },
     "scripts": {

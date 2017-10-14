@@ -10,21 +10,21 @@ Feature: Test that WP-CLI `vccw/scaffold-vccw` loads.
       Generate a new VCCW environment.
       """
 
-    When I run `wp scaffold vccw vccw.dev`
+    When I run `wp scaffold vccw vccw.test`
     Then the return code should be 0
-    And the vccw.dev directory should exist
+    And the vccw.test directory should exist
     And STDOUT should contain:
       """
       Success: Generated.
       """
-    And the vccw.dev/provision/default.yml file should exist
-    And the vccw.dev/site.yml file should exist
-    And the vccw.dev/site.yml file should contain:
+    And the vccw.test/provision/default.yml file should exist
+    And the vccw.test/site.yml file should exist
+    And the vccw.test/site.yml file should contain:
       """
-      hostname: vccw.dev
+      hostname: vccw.test
       ip: 192.168.33.10
       """
-    And the vccw.dev/site.yml file should contain:
+    And the vccw.test/site.yml file should contain:
       """
       lang: en_US
       """

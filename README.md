@@ -42,7 +42,7 @@ OPTIONS
     The directory of the new VCCW based guest machine.
 
   [--host=<hostname>]
-    Hostname of the guest machine. Default is `vccw.dev`.
+    Hostname of the guest machine. Default is `vccw.test`.
 
   [--ip=<ip-address>]
     IP address of the guest machine. Default is `192.168.33.10`.

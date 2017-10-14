@@ -6,3 +6,4 @@ installer
 node_modules/
 vendor/
 wp-cli.local.yml
+composer.lock
