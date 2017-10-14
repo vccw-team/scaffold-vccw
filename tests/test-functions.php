@@ -1,21 +1,21 @@
 <?php
 
-class Scaffold_VCCW_Test extends WP_UnitTestCase
+class Scaffold_VCCW_Functions_Test extends WP_UnitTestCase
 {
 	/**
-	 * Tests for the `Scaffold_VCCW::get_latest_vccw_url()`.
+	 * Tests for the `Scaffold_VCCW_Functions::get_latest_vccw_url()`.
 	 *
 	 * @test
 	 * @since 1.3.0
 	 */
 	public function get_latest_vccw_url()
 	{
-		$url = Scaffold_VCCW::get_latest_vccw_url();
+		$url = Scaffold_VCCW_Functions::get_latest_vccw_url();
 		$this->assertRegExp( '#^https://github.com/vccw-team/vccw/releases/download#', $url );
 	}
 
 	/**
-	 * Tests for the `Scaffold_VCCW::rempty()`.
+	 * Tests for the `Scaffold_VCCW_Functions::rempty()`.
 	 *
 	 * @test
 	 * @since 0.1.0
@@ -23,35 +23,35 @@ class Scaffold_VCCW_Test extends WP_UnitTestCase
 	public function rempty()
 	{
 		$dir = self::mockdir();
-		$files = Scaffold_VCCW::get_files( $dir );
+		$files = Scaffold_VCCW_Functions::get_files( $dir );
 		$this->assertSame( 7, iterator_count($files) );
 		$dir = self::mockdir();
-		Scaffold_VCCW::rempty( $dir );
-		$files = Scaffold_VCCW::get_files( $dir );
+		Scaffold_VCCW_Functions::rempty( $dir );
+		$files = Scaffold_VCCW_Functions::get_files( $dir );
 		$this->assertSame( 0, iterator_count($files) );
 		$dir = self::mockdir();
-		Scaffold_VCCW::rempty( $dir, array(
+		Scaffold_VCCW_Functions::rempty( $dir, array(
 			"dir02/dir02-01.txt",
 			"dir01/dir01-01/dir01-01-01.txt"
 		) );
-		$files = Scaffold_VCCW::get_files( $dir );
+		$files = Scaffold_VCCW_Functions::get_files( $dir );
 		$this->assertSame( 5, iterator_count($files) );
 	}
 
 	/**
-	 * Tests for the `Scaffold_VCCW::tempdir()`.
+	 * Tests for the `Scaffold_VCCW_Functions::tempdir()`.
 	 *
 	 * @test
 	 * @since 0.1.0
 	 */
 	public function tempdir()
 	{
-		$dir = Scaffold_VCCW::tempdir();
+		$dir = Scaffold_VCCW_Functions::tempdir();
 		$this->assertTrue( is_dir( $dir ) ); // $dir should exists.
 	}
 
 	/**
-	 * Tests for the `Scaffold_VCCW::rrmdir()`.
+	 * Tests for the `Scaffold_VCCW_Functions::rrmdir()`.
 	 *
 	 * @test
 	 * @since 0.1.0
@@ -60,12 +60,12 @@ class Scaffold_VCCW_Test extends WP_UnitTestCase
 	{
 		$dir = self::mockdir();
 		$this->assertTrue( is_dir( $dir ) ); // $dir should exists.
-		Scaffold_VCCW::rrmdir( $dir );
+		Scaffold_VCCW_Functions::rrmdir( $dir );
 		$this->assertFalse( is_dir( $dir ) ); // $dir should not exists.
 	}
 
 	/**
-	 * Tests for the `Scaffold_VCCW::rcopy()`.
+	 * Tests for the `Scaffold_VCCW_Functions::rcopy()`.
 	 *
 	 * @test
 	 * @since 0.1.0
@@ -74,14 +74,14 @@ class Scaffold_VCCW_Test extends WP_UnitTestCase
 	{
 		$src = self::mockdir();
 		$this->assertTrue( is_dir( $src ) ); // $dir should exists.
-		$dest = Scaffold_VCCW::tempdir();
+		$dest = Scaffold_VCCW_Functions::tempdir();
 		$this->assertTrue( is_dir( $dest ) ); // $dir should exists.
 		$this->assertTrue( self::md5sum( $src ) !== self::md5sum( $dest ) );
 		// Copy directory recursively then check md5.
-		Scaffold_VCCW::rcopy( $src, $dest );
+		Scaffold_VCCW_Functions::rcopy( $src, $dest );
 		$this->assertTrue( self::md5sum( $src ) === self::md5sum( $dest ) );
-		$dest = Scaffold_VCCW::tempdir();
-		Scaffold_VCCW::rcopy( $src, $dest, array( "dir01/dir01-01.txt" ) );
+		$dest = Scaffold_VCCW_Functions::tempdir();
+		Scaffold_VCCW_Functions::rcopy( $src, $dest, array( "dir01/dir01-01.txt" ) );
 		$this->assertFalse( is_file( $dest . '/dir01/dir01-01.txt' ) );
 		$this->assertTrue( is_file( $dest . '/dir01/dir01-02.txt' ) );
 		$this->assertTrue( is_file( $dest . '/dir02/dir02-01.txt' ) );
@@ -95,7 +95,7 @@ class Scaffold_VCCW_Test extends WP_UnitTestCase
 	 */
 	private static function mockdir()
 	{
-		$dir = Scaffold_VCCW::tempdir();
+		$dir = Scaffold_VCCW_Functions::tempdir();
 		mkdir( $dir . "/dir01" );
 		file_put_contents( $dir . "/dir01/dir01-01.txt", time() );
 		file_put_contents( $dir . "/dir01/dir01-02.txt", time() );
@@ -118,7 +118,7 @@ class Scaffold_VCCW_Test extends WP_UnitTestCase
 		if ( ! is_dir( $dir ) ) {
 			return false;
 		}
-		$iterator = Scaffold_VCCW::get_files( $dir );
+		$iterator = Scaffold_VCCW_Functions::get_files( $dir );
 		$md5 = array();
 		foreach ( $iterator as $item ) {
 			if ( ! $item->isDir() ) {
