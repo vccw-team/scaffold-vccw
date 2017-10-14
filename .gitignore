@@ -12,4 +12,4 @@ tests/
 utils/
 vendor/
 wp-cli.local.yml
-wp-cli.yml
+composer.lock

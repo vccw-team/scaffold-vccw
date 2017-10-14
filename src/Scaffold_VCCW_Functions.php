@@ -2,7 +2,7 @@
 
 use WP_CLI\Utils;
 
-class Scaffold_VCCW
+class Scaffold_VCCW_Functions
 {
 	/**
 	 * Get path to the mustache template.
